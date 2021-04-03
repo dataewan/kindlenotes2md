@@ -6,10 +6,15 @@ authors = ["Ewan Nicolson <ewan.nicolson@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-black = "^20.8b1"
+click = "^7.1.2"
+pyquery = "^1.4.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+black = "^20.8b1"
+
+[tool.poetry.scripts]
+kindlenotes2md = "kindlenotes2md.notes:cli"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
