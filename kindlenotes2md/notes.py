@@ -3,6 +3,7 @@ import os
 import codecs
 from pyquery import PyQuery
 from .htmlparsing import get_author, get_title, get_notes
+from .markdownoutput import md_output
 from .dataclasses import BookSummary
 
 
@@ -33,6 +34,4 @@ def cli(filename):
     checkfile(filename)
     contents = read_file(filename)
     book_notes = parse_contents(contents)
-
-    for note in book_notes.notes:
-        print(note)
+    print(md_output(book_notes))
