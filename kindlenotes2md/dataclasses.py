@@ -9,7 +9,13 @@ class Highlight:
 
 
 @dataclass
+class Section:
+    title: str
+    highlights: List[Highlight]
+
+
+@dataclass
 class BookSummary:
     author: str
     title: str
-    notes: List[Highlight]
+    notes: List[Section]

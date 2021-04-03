@@ -33,4 +33,6 @@ def cli(filename):
     checkfile(filename)
     contents = read_file(filename)
     book_notes = parse_contents(contents)
-    print(book_notes)
+
+    for note in book_notes.notes:
+        print(note)

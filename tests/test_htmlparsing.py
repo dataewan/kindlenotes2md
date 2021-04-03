@@ -53,7 +53,16 @@ def test_title():
     assert result == "bookTitle"
 
 
-def test_notes():
+def test_notes_rightnumber_sections():
     result = htmlparsing.get_notes(data)
-    assert len(result) == 3
-    assert result[0].text == "Everyone has a plan"
+    assert len(result) == 1
+
+
+def test_notes_righttitle():
+    result = htmlparsing.get_notes(data)
+    assert result[0].title == "Introduction"
+
+
+def test_notes_righthighlights():
+    result = htmlparsing.get_notes(data)
+    assert result[0].highlights[0].text == "Everyone has a plan"

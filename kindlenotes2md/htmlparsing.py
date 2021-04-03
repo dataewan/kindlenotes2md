@@ -1,6 +1,6 @@
 import pyquery
 from typing import List
-from .dataclasses import Highlight
+from .dataclasses import Highlight, Section
 
 
 def get_author(data: pyquery.PyQuery) -> str:
@@ -11,19 +11,24 @@ def get_title(data: pyquery.PyQuery) -> str:
     return data("div.bookTitle").text()
 
 
-def get_notes(data: pyquery.PyQuery) -> List[Highlight]:
-    headings = get_headings(data)
-    texts = get_texts(data)
-    return [
-        Highlight(heading=heading, text=text) for heading, text in zip(headings, texts)
-    ]
+def get_notes(data: pyquery.PyQuery) -> List[Section]:
+    results: List[Section] = []
+    section = Section(title="", highlights=[])
+    divs = data("div.noteText, div.noteHeading, div.sectionHeading")
+    heading = ""
+    text = ""
+    for div in divs:
+        _, className = div.items()[0]
+        if className == "sectionHeading":
+            if section.title != "":
+                results.append(section)
+            sectiontitle = div.text_content().strip()
+            section = Section(title=sectiontitle, highlights=[])
+        elif className == "noteHeading":
+            heading = div.text_content().strip()
+        elif className == "noteText":
+            text = div.text_content().strip()
+            section.highlights.append(Highlight(heading=heading, text=text))
 
-
-def get_headings(data: pyquery.PyQuery) -> List[str]:
-    headings = data("div.noteHeading")
-    return [i.text_content().strip() for i in headings]
-
-
-def get_texts(data: pyquery.PyQuery) -> List[str]:
-    headings = data("div.noteText")
-    return [i.text_content().strip() for i in headings]
+    results.append(section)
+    return results
