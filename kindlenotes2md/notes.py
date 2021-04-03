@@ -28,10 +28,23 @@ def parse_contents(contents: str) -> BookSummary:
     return bs
 
 
+def save_to_file(markdown: str, outfilename: str):
+    if os.path.exists(outfilename):
+        raise FileExistsError(f"{outfilename} already exists")
+
+    with open(outfilename, "w") as f:
+        f.write(markdown)
+
+
 @click.command()
-@click.argument("filename")
-def cli(filename):
-    checkfile(filename)
-    contents = read_file(filename)
+@click.argument("inputfilename")
+@click.option("-o", "--outfilename", default=None)
+def cli(inputfilename, outfilename):
+    checkfile(inputfilename)
+    contents = read_file(inputfilename)
     book_notes = parse_contents(contents)
-    print(md_output(book_notes))
+    markdown = md_output(book=book_notes)
+    if outfilename is None:
+        print(markdown)
+    else:
+        save_to_file(markdown, outfilename)
