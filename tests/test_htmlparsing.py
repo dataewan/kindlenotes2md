@@ -51,3 +51,9 @@ def test_author():
 def test_title():
     result = htmlparsing.get_title(data)
     assert result == "bookTitle"
+
+
+def test_notes():
+    result = htmlparsing.get_notes(data)
+    assert len(result) == 3
+    assert result[0].text == "Everyone has a plan"

@@ -1,15 +1,9 @@
 import click
 import os
 import codecs
-from dataclasses import dataclass
 from pyquery import PyQuery
-from . import htmlparsing
-
-
-@dataclass
-class BookSummary:
-    author: str = ""
-    title: str = ""
+from .htmlparsing import get_author, get_title, get_notes
+from .dataclasses import BookSummary
 
 
 def checkfile(filename: str):
@@ -26,9 +20,10 @@ def read_file(filename: str) -> str:
 
 def parse_contents(contents: str) -> BookSummary:
     data = PyQuery(contents)
-    author = htmlparsing.get_author(data)
-    title = htmlparsing.get_title(data)
-    bs = BookSummary(author=author, title=title)
+    author = get_author(data)
+    title = get_title(data)
+    notes = get_notes(data)
+    bs = BookSummary(author=author, title=title, notes=notes)
     return bs
 
 
