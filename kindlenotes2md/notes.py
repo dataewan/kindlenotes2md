@@ -37,4 +37,5 @@ def parse_contents(contents: str) -> BookSummary:
 def cli(filename):
     checkfile(filename)
     contents = read_file(filename)
-    parse_contents(contents)
+    book_notes = parse_contents(contents)
+    print(book_notes)
