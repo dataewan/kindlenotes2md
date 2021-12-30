@@ -1,6 +1,6 @@
 import pyquery
 from typing import List
-from .dataclasses import Highlight, Section
+from .datastructures import Highlight, Section
 
 
 def get_author(data: pyquery.PyQuery) -> str:

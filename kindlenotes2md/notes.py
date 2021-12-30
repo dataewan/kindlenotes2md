@@ -4,7 +4,7 @@ import codecs
 from pyquery import PyQuery
 from .htmlparsing import get_author, get_title, get_notes
 from .markdownoutput import md_output
-from .dataclasses import BookSummary
+from .datastructures import BookSummary
 
 
 def checkfile(filename: str):

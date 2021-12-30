@@ -1,4 +1,4 @@
-from .dataclasses import BookSummary, Section, Highlight
+from .datastructures import BookSummary, Section, Highlight
 
 
 def md_title(book: BookSummary) -> str:
