@@ -15,7 +15,7 @@ def checkfile(filename: str):
 
 def read_file(filename: str) -> str:
     """Read file contents but don't do any parsing"""
-    f = codecs.open(filename, "r")
+    f = codecs.open(filename, 'rb')
     return f.read()
 
 
